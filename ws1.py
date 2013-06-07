@@ -1,11 +1,12 @@
+# -*- coding: cp1250 -*-
 import nltk, logging
 
 from flask import Flask, jsonify, request, json
 
 app = Flask(__name__)
 
-@app.route("/ws1", methods=['POST'])
-def ws1():
+@app.route("/getTags", methods=['POST'])
+def getTags():
 # Webova sluzba 1:  in: {sentence:"English text to be processed"}
 #                  out: {keywords}
 
@@ -34,18 +35,23 @@ def ws1():
 
 	return jsonify(keywords=retval)
 
+@app.route("/saveTags", methods=['POST'])
+def saveTags():
+# Webova sluzba 2:  in: {temata (z WS1), ID clanku}
+#                  out: {ulozeno / neulozeno do DB}
+    return "Ahoj vole"
 
-@app.route("/ws2", methods=['POST'])
-def ws2():
-# Webova sluzba 2:  in: {temata (z WS1)}
-#                  out: {}
+@app.route("/getRelevant", methods=['GET'])
+def getRelevant():
+# Webova sluzba 3:  in: klicova slova a casove rozmezi
+#                  out: èlánky podle relevance
     return "Ahoj vole"
 
 
-@app.route("/ws3", methods=['POST'])
-def ws3():
-# Webova sluzba 3:  in: klicova slova a clanky
-#                  out: summary vychazejici z nejrelevantnejsiho clanku
+@app.route("/getSummary", methods=['GET'])
+def getSummary():
+# Webova sluzba 4:  in: ID clánku
+#                  out: vycuc podstatného textu
     return "Ahoj vole"
 
 
